@@ -1,7 +1,6 @@
 package com.nikkath.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +16,13 @@ public class Cart {
     private double totalAmount;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-     private List<CartItems> items = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "cart",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+     private List<CartItem> items = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -43,11 +48,11 @@ public class Cart {
         this.createdAt = createdAt;
     }
 
-    public List<CartItems> getItems() {
+    public List<CartItem> getItems() {
         return items;
     }
 
-    public void setItems(List<CartItems> items) {
+    public void setItems(List<CartItem> items) {
         this.items = items;
     }
 

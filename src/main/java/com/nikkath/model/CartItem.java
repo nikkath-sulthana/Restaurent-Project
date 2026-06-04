@@ -1,12 +1,11 @@
 package com.nikkath.model;
 
 import jakarta.persistence.*;
-
-import javax.annotation.processing.Generated;
 //So CartItem acts as a bridge between:Cart,MenuItem
 
 @Entity
-public class CartItems {
+@Table(name = "cart_item")
+public class CartItem{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
@@ -16,7 +15,7 @@ public class CartItems {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name ="menu_item_by_id")
+    @JoinColumn(name ="menu_item_id")
     private MenuItem menuItem;
 
     private int quantity;
@@ -62,11 +61,11 @@ public class CartItems {
     public void setPrice(double price) {
         this.price = price;
     }
-    public CartItems() {
+    public CartItem() {
 
     }
 
-    public CartItems(Cart cart, MenuItem menuItem, int quantity, int price) {
+    public CartItem(Cart cart, MenuItem menuItem, int quantity, double price) {
         this.cart = cart;
         this.menuItem = menuItem;
         this.quantity = quantity;
