@@ -1,4 +1,4 @@
 package com.nikkath.service;
 
-public class AuthService {
+public class CustomerService {
 }
