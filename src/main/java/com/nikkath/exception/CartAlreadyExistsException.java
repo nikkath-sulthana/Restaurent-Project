@@ -1,4 +1,8 @@
 package com.nikkath.exception;
 
-public class cartAlreadyExistException {
+public class CartAlreadyExistsException extends RuntimeException {
+
+    public CartAlreadyExistsException(String message) {
+        super(message);
+    }
 }

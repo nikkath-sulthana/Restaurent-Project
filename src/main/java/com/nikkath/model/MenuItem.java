@@ -4,6 +4,7 @@ package com.nikkath.model;
 import jakarta.persistence.*;
 
 
+
 @Entity
 @Table(name = "menu_item")
 public class MenuItem {
@@ -12,9 +13,12 @@ public class MenuItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private String name;
 
+
     private double price;
+
 
     @Enumerated(EnumType.STRING)
      private Category category;
@@ -24,7 +28,10 @@ public class MenuItem {
      public String checkMenuAvailability(){
         return available? "Yes" : "NO";
      }
- private String imageUrl;
+
+
+     private String imageUrl;
+
 
      @Enumerated(EnumType.STRING)
      private FoodType foodType;

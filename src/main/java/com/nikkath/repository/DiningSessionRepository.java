@@ -1,6 +1,12 @@
 package com.nikkath.repository;
 import com.nikkath.model.DiningSession;
+import com.nikkath.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DiningRepository extends JpaRepository<DiningSession, Long> {
+
+import java.util.Optional;
+
+public interface DiningSessionRepository extends JpaRepository<DiningSession, Long> {
+
+    Optional<DiningSession> findByCustomerAndActiveTrue (Customer customer);
 }

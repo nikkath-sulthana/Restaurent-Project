@@ -12,8 +12,7 @@ public class Customer {
     private Long id;
     private String name;
     private String phoneNo;
-    private Integer tableNumber;
-    private LocalDateTime startAt = LocalDateTime.now();
+
 
 
 }

@@ -1,74 +1,29 @@
 package com.nikkath.model;
 
 import jakarta.persistence.*;
+
+import lombok.Data;
 //So CartItem acts as a bridge between:Cart,MenuItem
 
+@Data
 @Entity
 @Table(name = "cart_item")
-public class CartItem{
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name ="menu_item_id")
+    @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
 
     private int quantity;
 
-    private double price;
+    private double unitPrice;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    public MenuItem getMenuItem() {
-        return menuItem;
-    }
-
-    public void setMenuItem(MenuItem menuItem) {
-        this.menuItem = menuItem;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-    public CartItem() {
-
-    }
-
-    public CartItem(Cart cart, MenuItem menuItem, int quantity, double price) {
-        this.cart = cart;
-        this.menuItem = menuItem;
-        this.quantity = quantity;
-        this.price = price;
-    }
 }

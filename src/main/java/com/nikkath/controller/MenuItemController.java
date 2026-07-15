@@ -1,87 +1,80 @@
 package com.nikkath.controller;
 
 
+import com.nikkath.dto.MenuItemRequestDTO;
+import com.nikkath.dto.MenuItemRespondDTO;
+
 import com.nikkath.model.Category;
 import com.nikkath.model.FoodType;
-import com.nikkath.model.MenuItem;
-import com.nikkath.repository.MenuItemRepository;
+
+import com.nikkath.service.MenuItemService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/menu")
 public class MenuItemController {
 
     @Autowired
-    private MenuItemRepository menuItemRepository;
+    private MenuItemService menuItemService;
 
-    //getting by foodType
-    @GetMapping("/foodType/{foodType}")
-public List<MenuItem> getMenuByFoodType(@PathVariable FoodType foodType){
-        return menuItemRepository.findByFoodType(foodType);
-    }
-
-    @GetMapping("/category/{category}")
-    public List<MenuItem> getMenuByCategory(@PathVariable Category category) {
-        return menuItemRepository.findByCategory(category);
-    }
 
     // Get all menu items
     @GetMapping
-    public List<MenuItem> getAllMenuItems(){
-        return menuItemRepository.findAll();
+    public ResponseEntity<List<MenuItemRespondDTO>> getAllMenuItems() {
+        return ResponseEntity.ok(menuItemService.getAllMenuItems());
     }
+
 
     //get by id
     @GetMapping("/{id}")
-    public ResponseEntity<MenuItem> getMenuById(@PathVariable Long id) {
-        return menuItemRepository.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<MenuItemRespondDTO> getMenuById(@PathVariable Long id) {
+        return ResponseEntity.ok(menuItemService.getMenuById(id));
     }
+
 
     // Add a new menu item
- @PostMapping
-    public MenuItem addMenuItem(@RequestBody MenuItem menuItem){
-        return menuItemRepository.save(menuItem);
+    @PostMapping
+    public ResponseEntity<MenuItemRespondDTO> addMenuItem(@Valid @RequestBody MenuItemRequestDTO dto) {
+        return ResponseEntity.ok(menuItemService.save(dto));
     }
 
-// Update menu item (NO lambda)
-@PutMapping("/{id}")
-public MenuItem updateMenuItem(@PathVariable Long id,
-                               @RequestBody MenuItem menuItemDetails) {
 
-    MenuItem menuItem = menuItemRepository.findById(id).orElse(null);
+    //getting by foodType
+    @GetMapping("/foodType/{foodType}")
+    public List<MenuItemRespondDTO> getMenuByFoodType(
+            @PathVariable FoodType foodType) {
 
-    if (menuItem == null) {
-        throw new RuntimeException("MenuItem not found with id " + id);
+        return menuItemService.findByFoodType(foodType);
     }
 
-    menuItem.setName(menuItemDetails.getName());
-    menuItem.setPrice(menuItemDetails.getPrice());
-    menuItem.setCategory(menuItemDetails.getCategory());
-    menuItem.setAvailable(menuItemDetails.isAvailable());
-    menuItem.setImageUrl(menuItemDetails.getImageUrl());
-    menuItem.setFoodType(menuItemDetails.getFoodType());
-    return menuItemRepository.save(menuItem);
-}
 
-
-// Delete menu item (NO lambda)
-@DeleteMapping("/{id}")
-public String deleteMenuItem(@PathVariable Long id) {
-
-    MenuItem menuItem = menuItemRepository.findById(id).orElse(null);
-
-    if (menuItem == null) {
-        throw new RuntimeException("MenuItem not found with id " + id);
+    //getting by category
+    @GetMapping("/category/{category}")
+    public List<MenuItemRespondDTO> getMenuByCategory(@PathVariable Category category) {
+        return menuItemService.findByCategory(category);
     }
 
-    menuItemRepository.delete(menuItem);
-    return "MenuItem deleted with id: " + id;
-}
+
+    // Update menu item (NO lambda)
+    @PutMapping("/{id}")
+    public ResponseEntity<MenuItemRespondDTO> updateMenuItem(@PathVariable Long id,
+                                             @Valid @RequestBody MenuItemRequestDTO dto) {
+        return ResponseEntity.ok(menuItemService.updateMenuItem(id, dto));
+    }
+
+
+    // Delete menu item (NO lambda)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMenuItem(@PathVariable Long id) {
+
+        menuItemService.deleteMenuItem(id);
+
+        return ResponseEntity.ok("MenuItem deleted successfully with id: " + id);
+    }
 }

@@ -31,7 +31,7 @@ public class OrderService {
     private CartRepository cartRepository;
 
     @Transactional
-    public OrderResponseDTO checkout(Long diningSessionId){
+    public OrderResponseDTO placeOrder(Long diningSessionId){
         DiningSession diningSession = diningSessionRepository.findById(diningSessionId)
                 .orElseThrow(()-> new ResourceNotFoundException
                         ("Dining session not found with the Id: "+ diningSessionId));
