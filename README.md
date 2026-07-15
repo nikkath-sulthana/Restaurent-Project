@@ -1,58 +1,217 @@
-\# Restaurant Management System - Backend
+# 🍽️ Nik & Jab's Dine House - Restaurant Management System
 
+A full-stack Restaurant Management System built using Spring Boot and React. The application allows customers to log in using OTP, create a dining session, place food orders, and pay their bill digitally.
 
+---
 
-\## Description
+## 🚀 Features
 
-A Spring Boot based backend application for managing restaurant operations such as menu management, orders, and customers.
+### Authentication
+- Phone number login
+- OTP verification
+- Customer registration
 
+### Dining Session
+- Create dining session
+- Prevent multiple active sessions
+- Track active customer session
 
+### Menu
+- View all menu items
+- View menu by category
+- Admin can add, update, and delete menu items
 
-\## Tech Stack
+### Cart
+- Create cart
+- Add items
+- Update quantity
+- Remove items
+- View cart
+- Automatic total calculation
 
-\- Java
+### Orders
+- Place order from cart
+- Multiple orders per dining session
+- Order status tracking
+    - PLACED
+    - PREPARING
+    - READY
+    - SERVED
+    - CANCELLED
 
-\- Spring Boot
+### Billing (Upcoming)
+- Generate final bill
+- Calculate total amount
+- Payment integration
+- Close dining session
 
-\- Maven
+---
 
-\- MySQL
+## 🛠️ Tech Stack
 
-\- REST API
+### Backend
+- Java 21 (or your JDK version)
+- Spring Boot
+- Spring Data JPA
+- Hibernate
+- MySQL
+- Maven
 
+### Frontend
+- React
+- Vite
+- Tailwind CSS
+- Axios
 
+### Tools
+- IntelliJ IDEA
+- Postman
+- Git
+- GitHub
 
-\## Features
+---
 
-\- Menu management (Add / Update / View food items)
+## 📂 Project Structure
 
-\- Order management
+src
+├── controller
+├── service
+├── repository
+├── entity
+├── dto
+├── exception
+├── config
+└── util
 
-\- RESTful APIs
+---
 
-\- Exception handling
+## 🗄️ Database Tables
 
+- customers
+- otp_details
+- dining_sessions
+- menu_items
+- carts
+- cart_items
+- orders
+- order_items
 
+---
 
-\## How to Run
+## 📌 API Modules
 
-1\. Clone the repository
+### Authentication
+- Send OTP
+- Verify OTP
 
-2\. Configure database in application.properties
+### Menu
+- Get all menu items
+- Get menu item by ID
+- Add menu item
+- Update menu item
+- Delete menu item
 
-3\. Run the application using:
+### Cart
+- Create cart
+- Add item
+- Update quantity
+- Remove item
+- View cart
 
-&nbsp;  mvn spring-boot:run
+### Order
+- Place Order
+- View Orders
 
+### Billing (Upcoming)
+- Checkout
+- Generate Bill
+- Payment
 
+---
 
-\## Future Enhancements
+## 🔄 Application Flow
 
-\- Authentication \& Authorization
+Customer Login
+↓
+OTP Verification
+↓
+Create Dining Session
+↓
+View Menu
+↓
+Create Cart
+↓
+Add Items
+↓
+Place Order
+↓
+Kitchen Processes Order
+↓
+Customer Can Place More Orders
+↓
+Checkout
+↓
+Generate Final Bill
+↓
+Payment
+↓
+Close Dining Session
 
-\- Cart functionality
+---
 
-\- Payment integration
+## ⚙️ Installation
 
+### Clone Repository
 
+```bash
+git clone <repository-url>
+```
 
+### Navigate
+
+```bash
+cd restaurant-management-system
+```
+
+### Configure Database
+
+Update the database credentials in:
+
+```
+application.properties
+```
+
+### Run Backend
+
+```bash
+mvn spring-boot:run
+```
+
+### Run Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+---
+
+## 🔮 Future Enhancements
+
+- JWT Authentication
+- Role-based Authorization
+- Online Payment Gateway
+- Email Notifications
+- QR Code Table Login
+- Order History
+- Dashboard Analytics
+- Docker Deployment
+- Redis Caching
+
+---
+
+## 👨‍💻 Author
+
+**Nikkath Sulthana**
+
+Backend Developer | Java | Spring Boot | React | MySQL
