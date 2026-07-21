@@ -1,4 +1,5 @@
 package com.nikkath.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -24,9 +25,7 @@ public class DiningSession {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne(mappedBy = "diningSession",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToOne(mappedBy = "diningSession")
     private Cart cart;
 
 }

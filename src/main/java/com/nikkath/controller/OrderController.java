@@ -19,7 +19,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/{diningSessionId}/checkout")
-    public ResponseEntity<OrderResponseDTO> checkout(@PathVariable("diningSessionId") Long dinningSessionId){
+    public ResponseEntity<OrderResponseDTO> placeOrder(@PathVariable("diningSessionId") Long dinningSessionId){
 
         OrderResponseDTO response = orderService.placeOrder(dinningSessionId);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

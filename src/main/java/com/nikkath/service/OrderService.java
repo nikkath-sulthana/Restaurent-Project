@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderService {
 
     @Autowired
@@ -47,7 +48,7 @@ public class OrderService {
                 Order order = new Order();
                 order.setDiningSession(diningSession);
                 order.setOrderTime(LocalDateTime.now());
-                order.setStatus(OrderStatus.PLACED);
+                order.setStatus(OrderStatus.SERVED);
 
         List<OrderItem> orderItems = new ArrayList<>();
 

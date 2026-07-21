@@ -1,5 +1,6 @@
 package com.nikkath.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -30,6 +31,7 @@ public class Cart {
 
     @OneToOne
     @JoinColumn(name = "dining_session_id")
+    @JsonIgnore
     private DiningSession diningSession;
 
 }
