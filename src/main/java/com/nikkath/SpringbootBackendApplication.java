@@ -16,11 +16,21 @@ public class SpringbootBackendApplication {
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
+
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:5173", "https://restaurant-login-frontend.vercel.app")
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+						.allowedOrigins(
+								"http://localhost:5173",
+								"https://fastidious-gingersnap-fb8105.netlify.app"
+						)
+						.allowedMethods(
+								"GET",
+								"POST",
+								"PUT",
+								"DELETE",
+								"OPTIONS"
+						)
 						.allowedHeaders("*")
 						.allowCredentials(true);
 			}
